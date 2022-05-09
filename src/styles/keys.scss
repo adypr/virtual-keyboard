@@ -1,0 +1,103 @@
+.key {
+  position: relative;
+
+  width: 50px;
+  height: 45px;
+
+  font-weight: bold;
+
+  line-height: 42px;
+  text-align: center;
+  color: #d2dad9;
+
+  background-color: #1b1b1b;
+
+  border-radius: 4px;
+  box-shadow:
+    0 3px 4px rgb(0 0 0 / 100%),
+    inset 0 -2px 5px rgb(0 0 0 / 100%),
+    inset 0 2px 2px rgb(255 255 255 / 50%),
+    0 0 0 2px #000000;
+  cursor: pointer;
+
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    color: #00ccff;
+
+    background-color: #1e3338;
+    box-shadow:
+      0 3px 4px rgb(0 0 0 / 100%),
+      inset 0 -2px 5px rgb(0 0 0 / 100%),
+      inset 0 2px 2px rgb(255 255 255 / 50%),
+      0 0 0 2px #000000,
+      0 0 3px #1ec7f1,
+      0 0 10px #1ec7f1,
+      0 0 15px #1ec7f1,
+      0 0 20px #1ec7f1;
+  }
+
+  &[data-code="Backspace"],
+  &[data-code="CapsLock"],
+  &[data-code="Enter"],
+  &[data-code="ShiftLeft"],
+  &[data-code="ShiftRight"],
+  &[data-code="Space"] {
+    flex-grow: 1;
+  }
+
+  &[data-shiftletter] {
+    padding-right: 15px;
+
+    line-height: 50px;
+    text-align: right;
+  }
+
+  &[data-shiftletter]::before {
+    content: attr(data-shiftletter);
+    position: absolute;
+    top: 5px;
+    left: 5px;
+
+    display: block;
+
+    line-height: 100%;
+  }
+
+  &[data-code="CapsLock"].active {
+    background-color: #177c96;
+
+    &:hover {
+      box-shadow:
+        0 3px 4px rgb(0 0 0 / 100%),
+        inset 0 -2px 5px rgb(0 0 0 / 100%),
+        inset 0 2px 2px rgb(255 255 255 / 50%),
+        0 0 0 2px #000000,
+        0 0 3px #1ec7f1,
+        0 0 10px #1ec7f1,
+        0 0 15px #1ec7f1,
+        0 0 20px #1ec7f1;
+    }
+  }
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.key.active {
+  background-color: #550707;
+
+  box-shadow:
+    0 0 0 rgb(0 0 0 / 100%),
+    inset 0 -2px 5px rgb(0 0 0 / 100%),
+    inset 0 1px 1px rgb(255 255 255 / 10%),
+    0 0 0 2px #000000;
+}
+
+.digits {
+  &::before {
+    font-weight: bolder;
+    color: #ff0000;
+  }
+}
