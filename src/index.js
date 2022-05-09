@@ -177,7 +177,7 @@ function arrowLeft(textarea, tag) {
 
 function arrowRight(textarea, tag) {
   addEvent(tag, 'click', () => {
-    if (textarea.selectionStart > 0) {
+    if (textarea.selectionStart >= 0) {
       textarea.selectionStart += 1;
       textarea.selectionEnd = textarea.selectionStart;
     }
