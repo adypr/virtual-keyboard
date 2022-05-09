@@ -10,8 +10,6 @@ if (process.env.NODE_ENV === 'production') {
 
 let isDev = mode === 'development';
 
-console.log(mode + ' mode');
-
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   mode: mode,
@@ -22,6 +20,7 @@ module.exports = {
     filename: isDev ? 'js/[name].js' : 'js/[name].[contenthash].js',
     assetModuleFilename: 'assets/[hash][ext][query]',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/virtual-keyboard/',
     clean: true
   },
   devtool: 'source-map',

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "set NODE_ENV=development&&webpack serve",
     "dev": "set NODE_ENV=development&&webpack",
-    "build": "set NODE_ENV=production&&webpack"
+    "build": "set NODE_ENV=production&&webpack",
+    "deploy": "gh-pages -d dist"
   },
   "browserslist": [
     "last 2 versions",
@@ -48,6 +49,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "gh-pages": "^3.2.3",
     "normalize.css": "^8.0.1"
   }
 }
