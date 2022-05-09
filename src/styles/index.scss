@@ -1,0 +1,39 @@
+@use "global";
+@use "fonts";
+@use "keys";
+
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 15px;
+
+  background-color: #3d3d3d;
+  border-radius: 8px;
+
+  &__keys {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+
+    gap: 7px;
+  }
+
+  &__row {
+    display: flex;
+    gap: 6px;
+  }
+
+  &__textarea {
+    width: 834px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+
+    white-space: pre;
+
+    border-radius: 5px;
+  }
+}

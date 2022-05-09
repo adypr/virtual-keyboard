@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "command": "${workspaceRoot}/node_modules/.bin/babel",
+    "tasks": [
+        {
+            "label": "watch",
+            "type": "shell",
+            "command": "${workspaceRoot}/node_modules/.bin/babel",
+            "args": [
+                "src",
+                "--out-dir",
+                "lib",
+                "-w",
+                "--source-maps"
+            ],
+            "isBackground": true,
+            "problemMatcher": [],
+            "group": "build"
+        }
+    ]
+}

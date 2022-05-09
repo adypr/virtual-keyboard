@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0;
+  gap: 20px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  background-color: #e6e6e6;
+
+  transition: all 0.3s ease;
+}
+
+h1 {
+  font-family: Fredoka, Tahoma, Geneva, Verdana, sans-serif;
+  color: #9e3232;
+}
+
+textarea {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 1px #463737;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #704747;
+    border-radius: 9px;
+  }
+}
+
+textarea::selection {
+  background-color: #ff0000;
+}
+
+textarea::selection::-ms-clear {
+  background-color: #ff0000;
+}
