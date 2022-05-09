@@ -79,6 +79,25 @@
         0 0 20px #1ec7f1;
     }
   }
+
+  &[data-code="Backspace"],
+  &[data-code="Tab"],
+  &[data-code="CapsLock"],
+  &[data-code="ShiftLeft"],
+  &[data-code="ShiftRight"],
+  &[data-code="ControlLeft"],
+  &[data-code="ControlRight"],
+  &[data-code="MetaLeft"],
+  &[data-code="AltLeft"],
+  &[data-code="AltRight"],
+  &[data-code="ArrowLeft"],
+  &[data-code="ArrowRight"],
+  &[data-code="ArrowUp"],
+  &[data-code="ArrowDown"],
+  &[data-code="Enter"],
+  &[data-code="Delete"] {
+    background-color: #494949;
+  }
 }
 
 .uppercase {
