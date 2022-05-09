@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import { create } from './base';
 
 class Key {
@@ -8,7 +9,7 @@ class Key {
   }
 
   renderKey(lang) {
-    let key = create('div');
+    const key = create('div');
     key.classList.add('key');
     key.dataset.code = this.code;
     if (this.location) {

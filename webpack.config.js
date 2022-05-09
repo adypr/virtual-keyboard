@@ -8,31 +8,30 @@ if (process.env.NODE_ENV === 'production') {
   mode = 'production';
 }
 
-let isDev = mode === 'development';
+const isDev = mode === 'development';
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-  mode: mode,
+  mode,
   entry: {
-    scripts: './index.js'
+    scripts: './index.js',
   },
   output: {
     filename: isDev ? 'js/[name].js' : 'js/[name].[contenthash].js',
     assetModuleFilename: 'assets/[hash][ext][query]',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/virtual-keyboard/',
-    clean: true
+    clean: true,
   },
   devtool: 'source-map',
   plugins: [
-
     new HtmlWebpackPlugin({
       template: './index.pug',
-      inject: 'body'
+      inject: 'body',
     }),
     new MiniCssExtractPlugin({
-      filename: isDev ? 'css/[name].css' : 'css/[name].[contenthash].css'
-    })
+      filename: isDev ? 'css/[name].css' : 'css/[name].[contenthash].css',
+    }),
   ],
   module: {
     rules: [{
@@ -46,46 +45,46 @@ module.exports = {
             postcssOptions: {
               plugins: [
                 [
-                  'postcss-preset-env'
-                ]
-              ]
-            }
-          }
+                  'postcss-preset-env',
+                ],
+              ],
+            },
+          },
         },
-        'sass-loader'
-      ]
+        'sass-loader',
+      ],
     },
     {
       test: /\.(svg|png|jpg|jpeg|gif)$/i,
       type: 'asset/resource',
       generator: {
-        filename: isDev ? 'assets/images/[name][ext][query]' : 'assets/images/[name].[contenthash][ext][query]'
-      }
+        filename: isDev ? 'assets/images/[name][ext][query]' : 'assets/images/[name].[contenthash][ext][query]',
+      },
     },
     {
       test: /\.html$/i,
-      loader: 'html-loader'
+      loader: 'html-loader',
     },
     {
       test: /\.(woff|woff2|eot|ttf|otf)$/i,
       type: 'asset/resource',
       generator: {
-        filename: isDev ? 'assets/fonts/[name][ext][query]' : 'assets/fonts/[name].[contenthash][ext][query]'
-      }
+        filename: isDev ? 'assets/fonts/[name][ext][query]' : 'assets/fonts/[name].[contenthash][ext][query]',
+      },
     },
     {
       test: /\.pug$/,
       use: [{
-        loader: 'html-loader'
+        loader: 'html-loader',
       },
       {
         loader: 'pug-html-loader',
         options: {
-          pretty: true
-        }
-      }
+          pretty: true,
+        },
+      },
       ],
-      exclude: /(node_modules|bower_components)/
+      exclude: /(node_modules|bower_components)/,
     },
     {
       test: /\.m?js$/,
@@ -93,30 +92,30 @@ module.exports = {
       use: {
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/preset-env']
-        }
-      }
+          presets: ['@babel/preset-env'],
+        },
+      },
     },
     {
       test: /(\.ico)$/i,
       type: 'asset/resource',
       generator: {
-        filename: 'assets/favicon/[contenthash][ext][query]'
-      }
+        filename: 'assets/favicon/[contenthash][ext][query]',
+      },
     },
     {
       test: /\.(webmanifest|json|manifest)$/i,
       type: 'asset/resource',
       generator: {
-        filename: 'assets/favicon/[contenthash][ext][query]'
-      }
-    }
-    ]
+        filename: 'assets/favicon/[contenthash][ext][query]',
+      },
+    },
+    ],
   },
   devServer: {
     open: '/virtual-keyboard/index.html',
     hot: true,
-    port: 'auto'
+    port: 'auto',
 
-  }
+  },
 };

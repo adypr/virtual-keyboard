@@ -1,10 +1,13 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable prefer-destructuring */
 import '@babel/polyfill';
 import 'normalize.css';
 import './styles/index.scss';
 import './js/head';
 
 import {
-  domElem, domList, addEvent, create
+  domElem, domList, addEvent, create,
 } from './js/base';
 
 import keys from './js/keys';
@@ -13,21 +16,21 @@ import Keyboard from './js/Keyboard';
 import { addTitle, addDescription } from './js/textblocks';
 
 let storageLang = 'en';
-let keyboard = new Keyboard();
-let servKeys = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'BracketLeft', 'BracketRight', 'Backslash', 'Semicolon', 'Quote', 'Comma', 'Period', 'Slash'];
+const keyboard = new Keyboard();
+const servKeys = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'BracketLeft', 'BracketRight', 'Backslash', 'Semicolon', 'Quote', 'Comma', 'Period', 'Slash'];
 
 function generateRow(parent, arr, begin, end) {
-  let row = create('div');
+  const row = create('div');
   row.classList.add('keyboard__row');
   for (let i = begin; i <= end; i += 1) {
-    let keyButton = new Key(arr[i]);
+    const keyButton = new Key(arr[i]);
     row.append(keyButton.renderKey(storageLang));
   }
   parent.append(row);
 }
 
 function renderKeys(parent) {
-  let keyList = domList('.key');
+  const keyList = domList('.key');
   if (keyList.length === 0) {
     generateRow(parent, keys, 0, 13);
     generateRow(parent, keys, 14, 28);
@@ -69,7 +72,7 @@ function getLocalStorageLang() {
 function toggleCapsLock(tag) {
   const toggle = () => {
     tag.classList.toggle('active');
-    let letters = domList('[data-en]');
+    const letters = domList('[data-en]');
     letters.forEach((elem) => elem.classList.toggle('uppercase'));
   };
 
@@ -108,7 +111,7 @@ function printText(keysArea, textArea) {
       textArea.focus();
       let position = textArea.selectionStart;
       textArea.selectionEnd = position;
-      let resStr = '\n';
+      const resStr = '\n';
       e.preventDefault();
 
       textArea.value = textArea.value.slice(0, position) + resStr + textArea.value.slice(position);
@@ -126,7 +129,7 @@ function printText(keysArea, textArea) {
 
 function printTab(tag, input) {
   const addTab = () => {
-    let resStr = '    ';
+    const resStr = '    ';
     let position = input.selectionStart;
     input.selectionEnd = position;
     input.value = input.value.slice(0, position) + resStr + input.value.slice(position);
@@ -134,7 +137,7 @@ function printTab(tag, input) {
     input.selectionStart = position;
     input.selectionEnd = position;
   };
-  addEvent(tag, 'click', ()=> {
+  addEvent(tag, 'click', () => {
     addTab();
   });
   addEvent(document, 'keydown', (e) => {
@@ -187,8 +190,8 @@ function arrowRight(textarea, tag) {
 function arrowUp(textarea, tag) {
   addEvent(tag, 'click', () => {
     textarea.focus();
-    let start = textarea.selectionStart;
-    let arr = textarea.value.split('\n');
+    const start = textarea.selectionStart;
+    const arr = textarea.value.split('\n');
     let rowsBefore = 0;
     let sum = 0;
     let i = 0;
@@ -196,11 +199,12 @@ function arrowUp(textarea, tag) {
       if (sum + arr[i].length + 1 > start) break;
       sum += arr[i].length + 1;
       rowsBefore += 1;
-      i++;
+      i += 1;
     }
     if (rowsBefore > 0) {
-      let position = start - sum;
-      let newPosition = arr[rowsBefore - 1].length < position ? sum - 1 : sum - arr[rowsBefore - 1].length - 1 + position;
+      const position = start - sum;
+      const newPosition = arr[rowsBefore - 1].length < position ? sum - 1
+        : sum - arr[rowsBefore - 1].length - 1 + position;
       textarea.selectionStart = newPosition;
       textarea.selectionEnd = newPosition;
     }
@@ -210,8 +214,8 @@ function arrowUp(textarea, tag) {
 function arrowDown(textarea, tag) {
   addEvent(tag, 'click', () => {
     textarea.focus();
-    let start = textarea.selectionStart;
-    let arr = textarea.value.split('\n');
+    const start = textarea.selectionStart;
+    const arr = textarea.value.split('\n');
     let rowsBefore = 0;
     let sum = 0;
     let i = 0;
@@ -219,12 +223,14 @@ function arrowDown(textarea, tag) {
       if (sum + arr[i].length + 1 > start) break;
       sum += arr[i].length + 1;
       rowsBefore += 1;
-      i++;
+      i += 1;
     }
 
-    let position = start - sum;
+    const position = start - sum;
     if (rowsBefore + 1 < arr.length) {
-      let newPosition = arr[rowsBefore + 1].length < position ? sum + arr[rowsBefore].length + arr[rowsBefore + 1].length + 1 : sum + arr[rowsBefore].length + 1 + position;
+      const newPosition = arr[rowsBefore + 1].length < position
+        ? sum + arr[rowsBefore].length + arr[rowsBefore + 1].length + 1
+        : sum + arr[rowsBefore].length + 1 + position;
       textarea.selectionStart = newPosition;
       textarea.selectionEnd = newPosition;
     }
@@ -237,12 +243,12 @@ function deletionHandler(inputArea, tag1, tag2) {
 }
 
 function clickKeys() {
-  let clickedArea = domElem('.keyboard__keys');
+  const clickedArea = domElem('.keyboard__keys');
   addEvent(clickedArea, 'mousedown', (e) => {
-    let tag = e.target.classList;
+    const tag = e.target.classList;
     if (tag.contains('key') && e.target.dataset.code !== 'CapsLock') tag.add('active');
     if (e.target.textContent === 'Shift') {
-      let letters = domList('[data-en]');
+      const letters = domList('[data-en]');
       letters.forEach((element) => {
         element.classList.add('digits', 'uppercase');
         if (domElem('[data-code="CapsLock"]').classList.contains('active')) {
@@ -252,10 +258,10 @@ function clickKeys() {
     }
   });
   addEvent(clickedArea, 'mouseup', (e) => {
-    let tag = e.target.classList;
+    const tag = e.target.classList;
     if (tag.contains('key') && e.target.dataset.code !== 'CapsLock') tag.remove('active');
     if (e.target.textContent === 'Shift') {
-      let letters = domList('[data-en]');
+      const letters = domList('[data-en]');
       letters.forEach((element) => {
         element.classList.remove('digits', 'uppercase');
         if (domElem('[data-code="CapsLock"]').classList.contains('active')) {
@@ -266,8 +272,8 @@ function clickKeys() {
   });
 }
 
-addEvent(document, 'DOMContentLoaded', function () {
-  window.onload = function () {
+addEvent(document, 'DOMContentLoaded', () => {
+  window.onload = () => {
     getLocalStorageLang();
     buildKeyboard();
     renderKeys(keyboard.keysArea);
@@ -295,7 +301,7 @@ addEvent(document, 'keydown', (e) => {
   }
 
   if (e.key === 'Shift') {
-    let letters = domList('[data-en]');
+    const letters = domList('[data-en]');
     letters.forEach((element) => {
       element.classList.add('digits', 'uppercase');
       if (domElem('[data-code="CapsLock"]').classList.contains('active')) {
@@ -306,16 +312,16 @@ addEvent(document, 'keydown', (e) => {
 
   if (e.code !== 'CapsLock') domElem(`[data-code="${e.code}"]`).classList.add('active');
   // Redefining physical keys
-  let textArea = domElem('.keyboard__textarea');
+  const textArea = domElem('.keyboard__textarea');
   if (e.code.match('Key') || servKeys.includes(e.code)) {
     e.preventDefault();
-    let button = domElem(`[data-code="${e.code}"]`);
+    const button = domElem(`[data-code="${e.code}"]`);
     let resStr = button.dataset[storageLang];
     if (servKeys.includes(e.code) && (domElem("[data-code='ShiftLeft']").classList.contains('active') || domElem("[data-code='ShiftRight']").classList.contains('active'))) resStr = button.dataset[storageLang][0];
     if (servKeys.includes(e.code) && !(domElem("[data-code='ShiftLeft']").classList.contains('active') || domElem("[data-code='ShiftRight']").classList.contains('active'))) resStr = resStr.length > 1 ? resStr[1] : resStr;
     let position = textArea.selectionStart;
     textArea.selectionEnd = position;
-    let isCaps = domElem("[data-code='CapsLock']").classList.contains('active');
+    const isCaps = domElem("[data-code='CapsLock']").classList.contains('active');
     if (isCaps && (e.shiftKey || domElem("[data-code='ShiftLeft']").classList.contains('active') || domElem("[data-code='ShiftRight']").classList.contains('active'))) resStr = resStr.toLowerCase();
     else if (isCaps || e.shiftKey || domElem("[data-code='ShiftLeft']").classList.contains('active') || domElem("[data-code='ShiftRight']").classList.contains('active')) resStr = resStr.toUpperCase();
     textArea.value = textArea.value.slice(0, position) + resStr + textArea.value.slice(position);
@@ -332,7 +338,7 @@ addEvent(document, 'keyup', (e) => {
   if (e.code !== 'CapsLock') domElem(`[data-code="${e.code}"]`).classList.remove('active');
 
   if (e.key === 'Shift') {
-    let letters = domList('[data-en]');
+    const letters = domList('[data-en]');
     letters.forEach((element) => {
       element.classList.remove('digits', 'uppercase');
       if (domElem('[data-code="CapsLock"]').classList.contains('active')) element.classList.add('uppercase');

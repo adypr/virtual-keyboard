@@ -7,7 +7,7 @@ class Keyboard {
   }
 
   renderKeyboard(...classes) {
-    let newK = create('div');
+    const newK = create('div');
     newK.classList.add(...classes);
     newK.append(this.printArea);
     newK.append(this.keysArea);
@@ -15,14 +15,14 @@ class Keyboard {
   }
 
   renderPrintArea(...classes) {
-    let printArea = create('textarea');
+    const printArea = create('textarea');
     printArea.classList.add(...classes);
     printArea.setAttribute('rows', '5');
     this.printArea = printArea;
   }
 
   renderKeysArea(...classes) {
-    let keysArea = create('div');
+    const keysArea = create('div');
     keysArea.classList.add(...classes);
     this.keysArea = keysArea;
   }
