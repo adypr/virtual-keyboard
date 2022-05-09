@@ -114,7 +114,7 @@ module.exports = {
     ]
   },
   devServer: {
-    open: true,
+    open: '/virtual-keyboard/index.html',
     hot: true,
     port: 'auto'
 
