@@ -3,3 +3,10 @@ package-lock.json
 package.json
 webpack.config.js
 README.md
+*.ttf
+*.ico
+*.webmanifest
+*.png
+*.svg
+*.pug
+*.scss
