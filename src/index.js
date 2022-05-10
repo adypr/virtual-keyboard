@@ -344,4 +344,8 @@ addEvent(document, 'keyup', (e) => {
       if (domElem('[data-code="CapsLock"]').classList.contains('active')) element.classList.add('uppercase');
     });
   }
+  if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+    domElem('[data-code="ShiftLeft"]').classList.remove('active');
+    domElem('[data-code="ShiftRight"]').classList.remove('active');
+  }
 });
